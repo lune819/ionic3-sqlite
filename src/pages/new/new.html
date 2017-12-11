@@ -19,4 +19,9 @@
   <button ion-button (click)="insertIntoUserTable()">insertIntoUserTable</button>
   <button ion-button (click)="getCurrentData()">queryUserTable</button>
   {{result}}
+
+
+
+  <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div>
+  
 </ion-content>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import { Toast } from '@ionic-native/toast';
+import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 /**
  * Generated class for the NewPage page.
  *
@@ -24,12 +26,14 @@ export class NewPage {
   email: string;
   phone: string;
   location: string;
+  public avatar;
   private toast: Toast
   
     myAppDatabase: SQLiteObject;
     public result;
   constructor(public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
     //this.myAppDatabase=homepage.myAppDatabase;
+    this.avatar=this.navParams.get('url');
     this.username = "jyq";
     this.password= "pwd";
     this.gender = true;

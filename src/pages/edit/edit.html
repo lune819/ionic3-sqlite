@@ -1,0 +1,23 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>编辑</ion-title>
+  
+      <ion-buttons end>
+        <button ion-button>保存</button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+    <button ion-button (click)="presentActionSheet()">photo</button>
+    <button ion-button (click)="takePhoto()">TAEK PHOTO</button>
+    <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div>
+    <button ion-button (click)="goNews()">TAEK PHOTO</button>
+    
+    <button ion-button block color="secondary" class="Scan-button" (click)="scanQR()" [disabled]="loading">点我扫描</button>
+    <button ion-button block color="secondary" class="Scan-button" (click)="envphoto()" [disabled]="loading">扔图片</button>
+    
+
+  </ion-content>

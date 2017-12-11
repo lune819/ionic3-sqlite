@@ -11,26 +11,40 @@ import { HomePage } from '../pages/home/home';
 import {SQLite} from "@ionic-native/sqlite";
 import { Toast } from '@ionic-native/toast';
 
+//photo
+import {Camera} from "@ionic-native/camera";
+import {ImagePicker} from "@ionic-native/image-picker";
+import {EditPage} from '../pages/edit/edit';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+
+import { HttpModule} from '@angular/http';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    NewPage
+    NewPage,
+    EditPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    NewPage
+    NewPage,
+    EditPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     SQLite,
+    Camera,
+    ImagePicker,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Toast
   ]

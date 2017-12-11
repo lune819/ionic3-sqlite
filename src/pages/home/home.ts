@@ -3,13 +3,17 @@ import { NavController } from 'ionic-angular';
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import { Toast } from '@ionic-native/toast';
 import { NewPage} from '../new/new';
+import { EditPage} from '../edit/edit';
 
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  data:any = {};
 
   username: string;
   password: string;
@@ -27,7 +31,11 @@ export class HomePage {
   
 
 
-  constructor(public navCtrl: NavController, private sqlite: SQLite) {
+  constructor(public navCtrl: NavController, private sqlite: SQLite, public http: Http) {
+    this.data.username = '';
+    this.data.response = '';
+    this.http = http;
+
     this.username = "jyq";
     this.password= "pwd";
     this.gender = true;
@@ -38,6 +46,19 @@ export class HomePage {
     this.location = "default";
 
   }
+
+  submit() {
+    var link = 'http://tuxa.sme.utc/~na17a023/testphp.php';
+    var myData = JSON.stringify({username: this.data.username});
+    
+    this.http.post(link, myData)
+    .subscribe(data => {
+      this.data.response = data["_body"];
+    }, error => {
+        console.log("Oooops!");
+    });
+}
+
 
   initDatabase() {
     this.sqlite.create({
@@ -84,5 +105,9 @@ export class HomePage {
   goNews(){
     this.navCtrl.push(NewPage);
   }
+  goedit(){
+    this.navCtrl.push(EditPage);
+  }
+
 }
 
