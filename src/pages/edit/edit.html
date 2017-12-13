@@ -11,6 +11,7 @@
   </ion-header>
   
   <ion-content>
+      <button (click)="upload()" ion-button >Take Pic Upload </button>
     <button ion-button (click)="presentActionSheet()">photo</button>
     <button ion-button (click)="takePhoto()">TAEK PHOTO</button>
     <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div>
@@ -18,6 +19,7 @@
     
     <button ion-button block color="secondary" class="Scan-button" (click)="scanQR()" [disabled]="loading">点我扫描</button>
     <button ion-button block color="secondary" class="Scan-button" (click)="envphoto()" [disabled]="loading">扔图片</button>
-    
+    <button ion-button block color="secondary" class="Scan-button" (click)="takePhototest()" [disabled]="loading">jiancha</button>
+
 
   </ion-content>

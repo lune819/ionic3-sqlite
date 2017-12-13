@@ -14,14 +14,20 @@
 
 
 <ion-content padding>
-  <button ion-button (click)="getCurrentData()">Logout</button>
-  <button ion-button (click)="initDatabase()">initDatabase</button>
-  <button ion-button (click)="insertIntoUserTable()">insertIntoUserTable</button>
-  <button ion-button (click)="getCurrentData()">queryUserTable</button>
-  {{result}}
-
-
-
-  <div class="header-image" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div>
-  
+   <button ion-button (click)="takePhoto()">takePHOTO</button>
+  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
 </ion-content>
+ 
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <button ion-button icon-left (click)="presentActionSheet()">
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+      <button ion-button icon-left (click)="uploadImage()">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

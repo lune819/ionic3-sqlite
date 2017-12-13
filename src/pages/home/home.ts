@@ -60,6 +60,7 @@ export class HomePage {
 }
 
 
+
   initDatabase() {
     this.sqlite.create({
       name: 'myApp.db',

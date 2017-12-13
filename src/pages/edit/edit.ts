@@ -12,6 +12,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Http } from '@angular/http';
 
 
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+
+
 @IonicPage()
 @Component({
   selector: 'page-edit',
@@ -24,8 +27,12 @@ export class EditPage {
   avatar: string = "";
   //public logger: Logger,
   public scannedText: string;
+  public photo="";
+  public base64Img:  string = '';
+
 
   constructor(
+    private transfer: Transfer,
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public actionSheetCtrl: ActionSheetController, 
@@ -33,6 +40,7 @@ export class EditPage {
     public imagePicker: ImagePicker, 
     public camera: Camera,
     public http: Http,
+    
   private barcodeScanner: BarcodeScanner) {
 
     this.data.username = '';
@@ -41,19 +49,53 @@ export class EditPage {
 
   }
 
-  envphoto
-
-  submit() {
+  /*envphoto() {
     var link = 'http://tuxa.sme.utc/~na17a023/testphp.php';
     var myData = JSON.stringify({username: this.data.username});
     
+    var the_file = new Blob([e.target.result ], { type: "image/jpeg" } );
     this.http.post(link, myData)
     .subscribe(data => {
       this.data.response = data["_body"];
     }, error => {
         console.log("Oooops!");
     });
-  }
+  }*/
+
+  upload()
+  {
+    
+     let options = {
+
+         quality: 100
+          };
+
+
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64:
+
+   const fileTransfer: TransferObject = this.transfer.create();
+
+    let options1: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: 'name.jpg',
+       headers: {}
+    
+    }
+
+fileTransfer.upload(imageData, 'http://tuxa.sme.utc/~na17a023/photo.php', options1)
+ .then((data) => {
+   // success
+   alert("success");
+ }, (err) => {
+   // error
+   alert("error"+JSON.stringify(err));
+ });
+  });
+
+}
+  
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -94,6 +136,31 @@ export class EditPage {
     this.camera.getPicture(options).then(image => {
       console.log('Image URI: ' + image);
       this.avatar = image.slice(7);
+    }, error => {
+      console.log('Error: ' + error);
+    });
+  }
+
+  takePhototest() {
+    const options: CameraOptions = {
+      quality: 100,
+      allowEdit: true,
+      targetWidth: 200,
+      targetHeight: 200,
+      saveToPhotoAlbum: true,
+      //added
+      encodingType: this.camera.EncodingType.JPEG, 
+      destinationType: this.camera.DestinationType.DATA_URL,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+    this.camera.getPicture(options).then(imageData => {
+      //this.upload(imageData);
+      console.log('Image URI: ' + imageData);
+      //this.avatar = image.slice(7);
+      this.base64Img = 'data:image/jpeg;base64,' + imageData;
+      //alert(this.base64Img);
+      //console.log(this.base64Img)
     }, error => {
       console.log('Error: ' + error);
     });

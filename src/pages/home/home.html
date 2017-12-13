@@ -15,7 +15,7 @@
 <button ion-button (click)="initDatabase()">initDatabase</button>
 <button ion-button (click)="insertIntoUserTable()">insertIntoUserTable</button>
 <button ion-button (click)="newfonc()">queryUserTable</button>
-<button ion-button (click)="goNews()">change</button>
+<button ion-button (click)="goNews()">测试php传照片</button>
 <button ion-button (click)="goedit()">photo</button>
 <ion-list>
   <ion-item>
@@ -24,6 +24,7 @@
   </ion-item>
 
   <button ion-button block (click)="submit()">Submit to server</button>
+
 </ion-list>
 
 <ion-card>
@@ -32,11 +33,14 @@
   </ion-card-header>
 
   <ion-card-content>
-    <b>{{data.response}}</b>
+    {{data.response}}
   </ion-card-content>
 </ion-card>
 
 <p>results:
   {{result}}
 </p>
+
+<ion-img width="150" src={{data.response}}></ion-img>
+
 </ion-content>

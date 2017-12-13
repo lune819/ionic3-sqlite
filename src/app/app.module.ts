@@ -17,6 +17,10 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {EditPage} from '../pages/edit/edit';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
+
 import { HttpModule} from '@angular/http';
 
 @NgModule({
@@ -45,6 +49,9 @@ import { HttpModule} from '@angular/http';
     Camera,
     ImagePicker,
     BarcodeScanner,
+    File,
+    Transfer,
+    FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Toast
   ]
